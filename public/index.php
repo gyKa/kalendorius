@@ -13,8 +13,23 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => dirname(__DIR__) . '/views',
 ));
 
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => array (
+        'driver'    => 'pdo_mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'kalendorius',
+        'user'      => 'kalendorius',
+        'password'  => 'kalendorius',
+        'charset'   => 'utf8',
+    ),
+));
+
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.twig');
+    $sql = 'SELECT * FROM events';
+
+    $events = $app['db']->fetchAll($sql);
+
+    return $app['twig']->render('index.twig', ['events' => $events]);
 });
 
 $app->run();
