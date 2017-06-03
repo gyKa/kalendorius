@@ -25,11 +25,18 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 ));
 
 $app->get('/', function () use ($app) {
-    $sql = 'SELECT * FROM events';
+    $events = $app['db']->fetchAll('SELECT * FROM events');
+    $labels = $app['db']->fetchAll('SELECT * FROM labels');
+    $categories = $app['db']->fetchAll('SELECT * FROM categories');
 
-    $events = $app['db']->fetchAll($sql);
-
-    return $app['twig']->render('index.twig', ['events' => $events]);
+    return $app['twig']->render(
+        'index.twig',
+        [
+            'events' => $events,
+            'labels' => $labels,
+            'categories' => $categories,
+        ]
+    );
 });
 
 $app->run();

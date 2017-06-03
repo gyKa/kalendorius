@@ -49,7 +49,26 @@
     </head>
     <body>
         <div class="container">
-            <div id="calendar"></div>
+            <div class="row">
+                <div class="col-md-1">
+                    <div>etiketės</div>
+                    <ul>
+                    {% for label in labels %}
+                        <li>{{ label.title }}</li>
+                    {% endfor %}
+                    </ul>
+
+                    <div>kategorijos</div>
+                    <ul>
+                    {% for category in categories %}
+                        <li>{{ category.title }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-11">
+                    <div id="calendar"></div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
