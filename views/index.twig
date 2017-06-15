@@ -51,17 +51,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-1">
-                    <div>etiketės</div>
                     <ul>
                     {% for label in labels %}
                         <li>{{ label.title }}</li>
-                    {% endfor %}
-                    </ul>
-
-                    <div>kategorijos</div>
-                    <ul>
-                    {% for category in categories %}
-                        <li>{{ category.title }}</li>
                     {% endfor %}
                     </ul>
                 </div>
