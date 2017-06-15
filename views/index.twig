@@ -34,12 +34,14 @@
             $(document).ready(function() {
                 $('#calendar').fullCalendar({
                     locale: 'lt',
+                    displayEventTime: false,
                     events: [
                         {% for event in events %}
                         {
                             title: '{{ event.title }}',
-                            start: '{{ event.start_at }}'
-                        }
+                            start: '{{ event.start_at }}'{% if event.end_at %},
+                            end: '{{ event.end_at }}T23:59:00'{% endif %}
+                        },
                         {% endfor %}
                     ]
 
